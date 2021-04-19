@@ -1,8 +1,10 @@
 # Magento Pre-Prod and Prod migration from Webscale to AWS #
 
 ## Prior to starting this process please review last year's Folio3 setup - https://revivermx.atlassian.net/wiki/spaces/PR/pages/1054081172/General+Magento+setup+guidelines #
-The reasons to migrate our existing Magento environment to AWS is for 
 
+The reason to migrate our existing Magento environment to AWS is  
+
+----------------------------------------------------------------------------------
 ### Migration Prep List: ###
 *
 
@@ -11,3 +13,34 @@ The reasons to migrate our existing Magento environment to AWS is for
 *
 
 *
+
+-----------------------------------------------------------------------------------
+#### AWS Resources ####
+
+* RDS
+
+* Autoscaling Group
+
+* Launch Configuration 
+
+* Security Groups
+
+* VPC (Virtual Private Cloud)
+
+* Elasticache
+
+* Load Balancer
+---------------------------------------------------------------------------------
+### Migration: ### 
+
+Steps: 
+
+1) 
+
+
+2)
+
+
+
+3)
+
