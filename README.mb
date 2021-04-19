@@ -1,8 +1,11 @@
 # Magento Pre-Prod and Prod migration from Webscale to AWS #
 
+
 ## Prior to starting this process please review last year's Folio3 setup - https://revivermx.atlassian.net/wiki/spaces/PR/pages/1054081172/General+Magento+setup+guidelines #
 
-The reason to migrate our existing Magento environment to AWS is  
+## Magento system requirements: https://devdocs.magento.com/guides/v2.3/install-gde/system-requirements.html
+- At minimal 2Gb (preferred 4Gb)
+
 
 ----------------------------------------------------------------------------------
 ### Migration Prep List: ###
@@ -35,12 +38,51 @@ The reason to migrate our existing Magento environment to AWS is
 
 Steps: 
 
-1) 
+1) Deploy Terraform Code to Build AWS Resources above
 
 
-2)
+2) Perform Puppet configuration (user_data)
+# code/commands
+
+* ls -al
+* sudo su
+* apt-get update
+* sudo apt-get install apache2 php libapache2-mod-php mysql-server php-mysql php-dom php-simplexml php-curl php-intl php-xsl php-mbstring php-zip php-xml composer
+* apt-get install php7.2-gd
+* apt-get install php7.2-mcrypt
+* sudo a2enmod rewrite
+* systemctl restart apache2
+# Manual
+* cd /etc/apache2/
+* sudo vi apache2.conf
+* replace 'None' word with 'all' 
+
+* systemctl restart apache2.service
+
+4) Github Clone
+
+* cd /var/www/html
+* git clone https://github.com/Magento/Magento2.git
+* cd Magento2
+* composer install
+- If get an error: "Your requirements could not be resolved to an installable set of packages."
+* apt-get install php7.2-bcmath
+- If same error modifiy permissions and re-run `composer install`
+* sudo apt-get install php-soap
+* composer install 
+- Modify permissions so Magento can install 
+* chmod -R 755 /var/www/html/Magento2/
+* chmod -R 777 /var/www/html/Magento2/var/
+* chmod -R 777 /var/www/html/Magento2/pub/
+* chmod -R 777 /var/www/html/Magento2/app/etc
+* chmod -R 777 /var/www/html/Magento2/generated
+
+3) RDS MySQL setup 
+* mysql -u root -p
+* show databases
+* create database Magento
 
 
-
-3)
+4) Install and Configure Magento on AWS 
+* copy and past the public IP address in browser xx.xxx.xxx.xx/Magento2/setup
 
